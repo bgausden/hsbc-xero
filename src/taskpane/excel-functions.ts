@@ -1,4 +1,6 @@
 // eslint-disable-next-line node/no-missing-import
+import { displayMessageBar } from "./messagebar";
+// eslint-disable-next-line node/no-missing-import
 import { TRANSACTION_DATE } from "./taskpane";
 
 /* global Excel */
@@ -344,4 +346,21 @@ export async function fixAmounts(
     console.error(`fixAmounts(): ${err}`);
     throw err;
   }
+}
+
+export async function populateWorksheet(data:any[][],context:Excel.RequestContext) {
+  const sheet = context.workbook.worksheets.getActiveWorksheet();
+  const usedRange = sheet.getUsedRangeOrNullObject();
+  usedRange.load(["address", "cellCount"]);
+  await context.sync();
+  if (usedRange.address) {
+    usedRange.format.fill.color = "lightYellow";
+    console.log(usedRange.address);
+    displayMessageBar(`Please load the transaction data into an empty workbook.`)
+    // TODO auto-hide the messagebar after 10s
+  } else {
+    sheet.getRange("A1").getResizedRange(data.length-1,data[0].length-1).values=data
+    sheet.getUsedRange().format.autofitColumns()
+  }
+  await context.sync();
 }

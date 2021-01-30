@@ -2,6 +2,7 @@ const devCerts = require("office-addin-dev-certs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const svgToMiniDataURI = require('mini-svg-data-uri');
 // eslint-disable-next-line no-unused-vars
 const fs = require("fs");
 const webpack = require("webpack");
@@ -45,6 +46,18 @@ module.exports = async (env, options) => {
           options: {
             name: "[path][name].[ext]"
           }
+        },
+        {
+          test: /\.svg$/i,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                esModule: false,
+                generator: content => svgToMiniDataURI(content.toString())
+              }
+            }
+          ]
         }
       ]
     },
@@ -80,8 +93,8 @@ module.exports = async (env, options) => {
         chunks: ["polyfill", "commands"]
       }),
       new webpack.ProvidePlugin({
-        "React": "react",
-     }),
+        React: "react"
+      })
     ],
     devServer: {
       headers: {

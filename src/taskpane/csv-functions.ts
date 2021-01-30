@@ -1,7 +1,9 @@
 import { CastingContext } from "csv-parse";
 import parse from "csv-parse/lib/sync";
 // eslint-disable-next-line node/no-missing-import
-import { TRANSACTION_DATE_INDEX } from "./taskpane";
+import { populateWorksheet } from "./excel-functions";
+// eslint-disable-next-line node/no-missing-import
+import { SALES, TRANSACTION_DATE_INDEX } from "./taskpane";
 
 /* global Excel */
 
@@ -14,7 +16,8 @@ const onRecord = ({ raw, record }: { raw: string; record: string[]; }, context: 
     if (counter > 0) {
       while (counter--) {
         // Get the index of the next occurence
-        nThIndex = String.prototype.indexOf.call(stringRaw, ",", nThIndex + ",".length);
+        //nThIndex = String.prototype.indexOf.call(stringRaw, ",", nThIndex + ",".length);
+        nThIndex = stringRaw.indexOf(",", nThIndex + ",".length)
       }
     }
 
@@ -38,7 +41,8 @@ const onRecord = ({ raw, record }: { raw: string; record: string[]; }, context: 
 
   return [record[0], record[4], "", `${record[2]} ${record[3]}`];
 };
-export const csvOnload = (reader: FileReader, context: Excel.RequestContext) => {
+
+export const csvOnload = (reader: FileReader, excelContext: Excel.RequestContext) => {
   return async () => {
     const raw = reader.result as string;
     const rawData = raw.slice(raw.indexOf(`\n`) + 1);
@@ -47,23 +51,13 @@ export const csvOnload = (reader: FileReader, context: Excel.RequestContext) => 
       trim: true,
       raw: true,
       cast: (value) => {
-        return value.replace(/\s+/g, " ").trim();
+        return value.replace(/\s+/g, " ").replace(SALES,"").trim()
       },
       onRecord: onRecord
     });
     // replace the header
     data[0] = ["Date", "Amount", "Payee", "Description"];
     console.log(data);
-    const sheet = context.workbook.worksheets.getActiveWorksheet();
-    const usedRange = sheet.getUsedRangeOrNullObject();
-    usedRange.load(["address", "cellCount"]);
-    await context.sync();
-    if (usedRange.address) {
-      usedRange.format.fill.color = "lightBlue";
-      console.log(usedRange.address);
-    } else {
-      sheet.getRange("A1");
-    }
-    await context.sync();
+    populateWorksheet(data,excelContext)
   };
 };

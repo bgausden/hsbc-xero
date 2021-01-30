@@ -13,60 +13,72 @@
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
 
     <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
-    <link
+    <!-- <link
       rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
-    />
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.css"
+    /> -->
     <!-- From https://reactjs.org/docs/cdn-links.html to make office-ui-fabric-react happy &/or @uifabric/react-hooks happy-->
     <!-- <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script> -->
-    
+
     <!-- From https://developer.microsoft.com/en-us/fluentui/#/controls/web/messagebar -->
     <!-- <script src="//unpkg.com/office-ui-fabric-react@7/dist/office-ui-fabric-react.js"></script>
     <script src="//unpkg.com/@uifabric/react-hooks@7/dist/react-hooks.js"></script> -->
-    
+
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.min.css" />
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.components.min.css" />
+
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
   </head>
+  <body id="app-body" class="ms-font-m ms-Fabric">
+    <main>
+      <header class="ms-welcome__header ms-bgColor-neutralLighter">
+        <img width="50%" alt="Lissome" title="Lissome" src="../../assets/Glow Corporate Vertical.svg" />
+        <h1 class="ms-font-su">HSBC Xero</h1>
+      </header>
 
-  <body class="ms-font-m ms-welcome ms-Fabric">
-    <header class="ms-welcome__header ms-bgColor-neutralLighter">
-      <img width="90" height="90" src="../../assets/logo-filled.png" alt="Contoso" title="Contoso" />
-      <h1 class="ms-font-su">Welcome</h1>
-    </header>
-
-    <section id="sideload-msg" class="ms-welcome__main">
-      <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
-    </section>
-    <main id="app-body" class="ms-welcome__main" style="display: none;">
-      <div id="messagebar"></div>
-      <h2 class="ms-font-xl">Discover what Office Add-ins can do for you today!</h2>
-      <ul class="ms-List ms-welcome__features">
-        <li class="ms-ListItem">
-          <i class="ms-Icon ms-Icon--Ribbon ms-font-xl"></i>
-          <span class="ms-font-m">Achieve more with Office integration</span>
-        </li>
-        <li class="ms-ListItem">
-          <i class="ms-Icon ms-Icon--Unlock ms-font-xl"></i>
-          <span class="ms-font-m">Unlock features and functionality</span>
-        </li>
-        <li class="ms-ListItem">
-          <i class="ms-Icon ms-Icon--Design ms-font-xl"></i>
-          <span class="ms-font-m">Create and visualize like a pro</span>
-        </li>
-      </ul>
-      <p class="ms-font-l">Modify the source files, then click <b>Run</b>.</p>
-      <form name="uploadForm">
-        <div>
-          <input id="file" type="file" name="file" />
+      <section id="sideload-msg" class="ms-welcome__main">
+        <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
+      </section>
+      <div class="ms-Grid" dir="ltr">
+        <div class="ms-Grid-row">
+          <div class="ms-Grid-col">
+            <p class="ms-font-l">From an empty worksheet, import the HSBC CSV file, then click <b>Go</b>.</p>
+          </div>
         </div>
-        <!-- <div><input type="submit" value="Send file" /></div> -->
-      </form>
-      <div role="button" id="load" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl">
-        <span class="ms-Button-label">Load</span>
-      </div>
-      <div role="button" id="run" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl">
-        <span class="ms-Button-label">Run</span>
+        <div class="ms-Grid-row">
+          <div class="ms-Grid-col ms-sm2 ms-lg1">
+            <i class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv ms-font-xl"></i>
+          </div>
+          <div class="ms-Grid-col ms-sm10 ms-lg1">
+            <button id="pickCSV" class="ms-Button ms-Button--primary" onclick="document.getElementById('file').click()">
+              <div>
+                <span class="ms-Button-label">
+                  Select CSV File
+                </span>
+                <input id="file" style="visibility: hidden;" type="file" name="file" />
+              </div>
+            </button>
+          </div>
+        </div>
+        <div class="ms-Grid-row">
+          <div class="ms-Grid-col ms-sm12 ms-lg1">
+            <button id="load" class="ms-Button ms-Button--primary">
+              <span class="ms-Button-label">Go</span>
+            </button>
+          </div>
+        </div>
+        <!-- <div class="ms-Grid-row">
+          <div class="ms-Grid-col ms-sm1">
+            <i class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv ms-font-xl"></i>
+          </div>
+          <div class="ms-Grid-col ms-sm11">
+            <div role="button" id="run" class="ms-Button ms-Button--hero ms-font-xl">
+              <span class="ms-Button-label">Run</span>
+            </div>
+          </div>
+        </div> -->
       </div>
     </main>
   </body>
