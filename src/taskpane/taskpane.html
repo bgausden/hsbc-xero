@@ -22,11 +22,21 @@
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script> -->
 
     <!-- From https://developer.microsoft.com/en-us/fluentui/#/controls/web/messagebar -->
-    <!-- <script src="//unpkg.com/office-ui-fabric-react@7/dist/office-ui-fabric-react.js"></script>
-    <script src="//unpkg.com/@uifabric/react-hooks@7/dist/react-hooks.js"></script> -->
+    <script src="//unpkg.com/office-ui-fabric-react@7/dist/office-ui-fabric-react.js"></script>
+    <script src="//unpkg.com/@uifabric/react-hooks@7/dist/react-hooks.js"></script>
 
-    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.min.css" />
-    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.components.min.css" />
+    <!--     <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.min.css" />
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.components.min.css" /> -->
+
+    <!-- Get basic component styling for non-react components from the defunct office ui fabric js project-->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.components.min.css"
+    />
 
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
@@ -43,27 +53,25 @@
       </section>
       <div class="ms-Grid" dir="ltr">
         <div class="ms-Grid-row">
+          <div class="ms-Grid-col" id="messagebar"></div>
+        </div>
+        <div class="ms-Grid-row">
           <div class="ms-Grid-col">
             <p class="ms-font-l">From an empty worksheet, import the HSBC CSV file, then click <b>Go</b>.</p>
           </div>
         </div>
         <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm2 ms-lg1">
-            <i class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv ms-font-xl"></i>
-          </div>
           <div class="ms-Grid-col ms-sm10 ms-lg1">
-            <button id="pickCSV" class="ms-Button ms-Button--primary" onclick="document.getElementById('file').click()">
-              <div>
-                <span class="ms-Button-label">
-                  Select CSV File
-                </span>
-                <input id="file" style="visibility: hidden;" type="file" name="file" />
-              </div>
+            <input id="file" type="file" name="file" style="display:none" />
+            <button id="pickCSV" class="ms-Button" onclick="document.getElementById('file').click()">
+              <span class="ms-Button-label">
+                Select CSV File
+              </span>
             </button>
           </div>
         </div>
         <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm12 ms-lg1">
+          <div class="ms-Grid-col ms-sm10 ms-lg1">
             <button id="load" class="ms-Button ms-Button--primary">
               <span class="ms-Button-label">Go</span>
             </button>

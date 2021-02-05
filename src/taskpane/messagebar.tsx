@@ -1,11 +1,6 @@
-import React from "react";
-import {
-  Stack,
-  MessageBar,
-  MessageBarType,
-  IStackProps
-} from "office-ui-fabric-react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Stack, MessageBar, MessageBarType, IStackProps } from "@fluentui/react";
 
 /* global document */
 
@@ -25,7 +20,7 @@ export function displayMessageBar(messageText: string) {
     tokens: { childrenGap: 20 }
   };
 
-  const ErrorExample = (props: IMessageBarProps) => (
+  const MBError = (props: IMessageBarProps) => (
     <MessageBar
       messageBarType={MessageBarType.error}
       isMultiline={false}
@@ -46,7 +41,7 @@ export function displayMessageBar(messageText: string) {
     return visible !== false ? (
       <Stack {...horizontalStackProps}>
         <Stack {...verticalStackProps}>
-          <ErrorExample {...props} />
+          <MBError {...props} />
         </Stack>
       </Stack>
     ) : null;

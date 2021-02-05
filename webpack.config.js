@@ -2,7 +2,7 @@ const devCerts = require("office-addin-dev-certs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const svgToMiniDataURI = require('mini-svg-data-uri');
+const svgToMiniDataURI = require("mini-svg-data-uri");
 // eslint-disable-next-line no-unused-vars
 const fs = require("fs");
 const webpack = require("webpack");
