@@ -5,24 +5,19 @@
  */
 
 // images references in the manifest
-import "../../assets/icon-16.png";
-import "../../assets/icon-32.png";
-import "../../assets/icon-80.png";
-import "../../assets/Glow Corporate Vertical.svg";
+import "../../assets/Glow Corporate Vert Prot16w.png";
+import "../../assets/Glow Corporate Vert Prot32w.png";
+import "../../assets/Glow Corporate Vert Prot64w.png";
+import "../../assets/Glow Corporate Vert Prot80w.png";
 
 // eslint-disable-next-line node/no-missing-import
 import { csvOnload } from "./csv-functions";
-import { initializeIcons } from "@fluentui/react";
+import { initializeIcons } from "@fluentui/react/lib/Icons";
 
 /* global document, Excel, Office, FileReader */
 
-const mergeCol = 1; // zero indexed
-const POST_DATE = "Post Date";
 export const TRANSACTION_DATE = "Transaction Date";
 export const TRANSACTION_DATE_INDEX = 1; // zero indexed
-const DESCRIPTION = "Description";
-const FOREIGN_CURRENCY_AMOUNT = "Foreign Currency Amount";
-const AMOUNT_HKD = "Amount(HKD)";
 export const SALES = "SALES: ";
 
 export async function load() {
@@ -30,12 +25,13 @@ export async function load() {
     await Excel.run(async context => {
       const file = document.getElementById("file") as HTMLInputElement;
       const reader = new FileReader();
-      let content: [[string]];
 
       if (file?.files && file.files[0]) {
         reader.onload = csvOnload(reader, context);
         reader.readAsText(file.files[0]);
       }
+
+      context.trackedObjects.add(context.workbook.worksheets.getActiveWorksheet());
     });
   } catch (error) {
     console.error(`load(): ${error}`);

@@ -11,8 +11,8 @@ const PAYMENT = /PAYMENT - THANK YOU.*$/
 const DESCRIPTION_INDEX = 2 // column index for Description
 const AMOUNT_INDEX = 4 // column index for Amount(HKD)
 
-const cast = (value:string) => {
-  return value.replace(/\s+/g, " ").replace(SALES,"").trim()
+const cast = (value: string) => {
+  return value.replace(/\s+/g, " ").replace(SALES, "").trim()
 }
 
 const onRecord = ({ raw, record }: { raw: string, record: string[] }, context: CastingContext) => {
@@ -42,7 +42,7 @@ const onRecord = ({ raw, record }: { raw: string, record: string[] }, context: C
 
   // Purchase amounts need to be negative for Xero import
   // Payments are positive amounts
-  if (!record[DESCRIPTION_INDEX].match(PAYMENT)) {
+  if (record[DESCRIPTION_INDEX] ?? !record[DESCRIPTION_INDEX].match(PAYMENT)) {
     record[AMOUNT_INDEX] = (Number.parseFloat(record[AMOUNT_INDEX]) * -1).toString()
   }
 
@@ -67,7 +67,6 @@ export const csvOnload = (reader: FileReader, excelContext: Excel.RequestContext
     });
     // replace the header
     data[0] = ["Date", "Amount", "Payee", "Description"];
-    console.log(data);
-    populateWorksheet(data,excelContext)
+    populateWorksheet(data, excelContext)
   };
 };

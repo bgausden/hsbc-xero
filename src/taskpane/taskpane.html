@@ -12,23 +12,7 @@
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
 
-    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
-    <!-- <link
-      rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.css"
-    /> -->
-    <!-- From https://reactjs.org/docs/cdn-links.html to make office-ui-fabric-react happy &/or @uifabric/react-hooks happy-->
-    <!-- <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script> -->
-
-    <!-- From https://developer.microsoft.com/en-us/fluentui/#/controls/web/messagebar -->
-    <script src="//unpkg.com/office-ui-fabric-react@7/dist/office-ui-fabric-react.js"></script>
-    <script src="//unpkg.com/@uifabric/react-hooks@7/dist/react-hooks.js"></script>
-
-    <!--     <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.min.css" />
-    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.6.1/fabric.components.min.css" /> -->
-
-    <!-- Get basic component styling for non-react components from the defunct office ui fabric js project-->
+    <!-- Get basic component styling for non-react components from the defunct office ui fabric js project. NB must load before office-ui-fabric-core or icons won't load-->
     <link
       rel="stylesheet"
       href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css"
@@ -38,19 +22,26 @@
       href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.components.min.css"
     />
 
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.css"
+    />
+
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
   </head>
   <body id="app-body" class="ms-font-m ms-Fabric">
     <main>
       <header class="ms-welcome__header ms-bgColor-neutralLighter">
-        <img width="50%" alt="Lissome" title="Lissome" src="../../assets/Glow Corporate Vertical.svg" />
+        <img inline width="50%" alt="Lissome" title="Lissome" src="../../assets/Glow Corporate Vertical.svg" />
         <h1 class="ms-font-su">HSBC Xero</h1>
       </header>
 
       <section id="sideload-msg" class="ms-welcome__main">
         <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
       </section>
+      <div><input id="file" type="file" name="file" style="display:none" accept=".csv,text/csv" /></div>
       <div class="ms-Grid" dir="ltr">
         <div class="ms-Grid-row">
           <div class="ms-Grid-col" id="messagebar"></div>
@@ -61,9 +52,9 @@
           </div>
         </div>
         <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm10 ms-lg1">
-            <input id="file" type="file" name="file" style="display:none" />
+          <div class="ms-Grid-col ms-sm12 ms-lg6 ms-xl3 ms-xxl2">
             <button id="pickCSV" class="ms-Button" onclick="document.getElementById('file').click()">
+              <i class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv"></i>
               <span class="ms-Button-label">
                 Select CSV File
               </span>
@@ -71,22 +62,12 @@
           </div>
         </div>
         <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm10 ms-lg1">
+          <div class="ms-Grid-col ms-sm6 ms-lg2">
             <button id="load" class="ms-Button ms-Button--primary">
               <span class="ms-Button-label">Go</span>
             </button>
           </div>
         </div>
-        <!-- <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm1">
-            <i class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv ms-font-xl"></i>
-          </div>
-          <div class="ms-Grid-col ms-sm11">
-            <div role="button" id="run" class="ms-Button ms-Button--hero ms-font-xl">
-              <span class="ms-Button-label">Run</span>
-            </div>
-          </div>
-        </div> -->
       </div>
     </main>
   </body>

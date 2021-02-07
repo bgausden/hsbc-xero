@@ -1,6 +1,8 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { Stack, MessageBar, MessageBarType, IStackProps } from "@fluentui/react";
+import React, {FunctionComponent, useState, useCallback} from "react";
+import {render} from "react-dom";
+//import { Stack, MessageBar, MessageBarType, IStackProps } from "@fluentui/react";
+import {Stack, IStackProps} from "@fluentui/react/lib/Stack"
+import {MessageBar, MessageBarType} from "@fluentui/react/lib/MessageBar"
 
 /* global document */
 
@@ -31,10 +33,10 @@ export function displayMessageBar(messageText: string) {
     </MessageBar>
   );
 
-  const BasicMessageBar: React.FunctionComponent<IMessageBarProps> = ({ messageText }) => {
-    const [visible, setVisible] = React.useState<boolean | undefined>(true);
+  const BasicMessageBar: FunctionComponent<IMessageBarProps> = ({ messageText }) => {
+    const [visible, setVisible] = useState<boolean | undefined>(true);
 
-    const setVisibility = React.useCallback((visible: boolean) => setVisible(visible), []);
+    const setVisibility = useCallback((visible: boolean) => setVisible(visible), []);
 
     const props: IMessageBarProps = { messageText, visible: true, onDismiss: () => setVisibility(false) };
 
@@ -47,5 +49,5 @@ export function displayMessageBar(messageText: string) {
     ) : null;
   };
 
-  ReactDOM.render(<BasicMessageBar messageText={messageText} />, document.getElementById("messagebar"));
+  render(<BasicMessageBar messageText={messageText} />, document.getElementById("messagebar"));
 }
