@@ -22,7 +22,7 @@ export const SALES = "SALES: ";
 
 export async function load() {
   try {
-    await Excel.run(async context => {
+    await Excel.run(async (context) => {
       const file = document.getElementById("file") as HTMLInputElement;
       const reader = new FileReader();
 
@@ -38,7 +38,7 @@ export async function load() {
   }
 }
 
-Office.onReady(info => {
+Office.onReady((info) => {
   initializeIcons();
   if (info.host === Office.HostType.Excel) {
     document.getElementById("sideload-msg")!.style.display = "none";
