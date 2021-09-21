@@ -227,7 +227,8 @@ export async function findHeader(
     }
   } catch (err) {
     console.log(`findHeader(): ${err}`)
-    return new Error(err)
+    let stringErr = err as string
+    return new Error(stringErr)
   }
 }
 
