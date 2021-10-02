@@ -8,6 +8,7 @@ import { SALES, TRANSACTION_DATE_INDEX } from "./taskpane"
 /* global Excel */
 
 const PAYMENT = /PAYMENT - THANK YOU.*$/
+const RETURN = /RETURN:.*$/
 const DESCRIPTION_INDEX = 2 // column index for Description
 const AMOUNT_INDEX = 4 // column index for Amount(HKD)
 
@@ -41,8 +42,14 @@ const onRecord = ({ raw, record }: { raw: string; record: string[] }, context: C
   }
 
   // Purchase amounts need to be negative for Xero import
-  // Payments are positive amounts
-  if (record[DESCRIPTION_INDEX] ?? !record[DESCRIPTION_INDEX].match(PAYMENT)) {
+  // Payments and rerurns are positive amounts (credits) in Xero
+  // HSBC CSV has everything as a positive value
+  if (record[DESCRIPTION_INDEX].match(PAYMENT) || record[DESCRIPTION_INDEX].match(RETURN)) {
+    // do nothing. The amount is already positive
+    console.log("Leave value positive", record[DESCRIPTION_INDEX])
+  }
+  else {
+    // change the value to a negative value
     record[AMOUNT_INDEX] = (Number.parseFloat(record[AMOUNT_INDEX]) * -1).toString()
   }
 
