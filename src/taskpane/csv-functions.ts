@@ -9,13 +9,15 @@ import { SALES, TRANSACTION_DATE_INDEX } from "./taskpane"
 
 const PAYMENT = /PAYMENT - THANK YOU.*$/
 const RETURN = /RETURN:.*$/
-const DESCRIPTION_INDEX = 2 // column index for Description
+const DESCRIPTION_INDEX = 2 // column index for Description - sometimes contains commas and breaks parsing
 const AMOUNT_INDEX = 4 // column index for Amount(HKD)
 
 const cast = (value: string) => {
   return value.replace(/\s+/g, " ").replace(SALES, "").trim()
 }
 
+// onRecord is called each time CSV.parse generates a new candidate record (row)
+// we use it for fixing HSBC stupidity and selecting/re-arranging the output columns
 const onRecord = ({ raw, record }: { raw: string; record: string[] }, context: CastingContext) => {
   if (context.error && context.error.code === "CSV_INCONSISTENT_RECORD_LENGTH") {
     // find the 3rd comma in the line and excise it as it's probably incorrectly part of the payee's name (and shouldn't be but HSBC are crap so...)
@@ -45,13 +47,24 @@ const onRecord = ({ raw, record }: { raw: string; record: string[] }, context: C
   // Payments and rerurns are positive amounts (credits) in Xero
   // HSBC CSV has everything as a positive value
   if (record[DESCRIPTION_INDEX].match(PAYMENT) || record[DESCRIPTION_INDEX].match(RETURN)) {
-    // do nothing. The amount is already positive
-    console.log("Leave value positive", record[DESCRIPTION_INDEX])
+    if (record[AMOUNT_INDEX]) {
+      record[AMOUNT_INDEX] = (Number.parseFloat(record[AMOUNT_INDEX]) * -1).toFixed(2)
+    } else {
+      // no amount so return null (no data)
+      return null
+    }
   }
-  else {
+  else { // not a PAYMENT and not a RETURN
     // change the value to a negative value
-    record[AMOUNT_INDEX] = (Number.parseFloat(record[AMOUNT_INDEX]) * -1).toString()
+    if (record[AMOUNT_INDEX]) {
+      record[AMOUNT_INDEX] = (Number.parseFloat(record[AMOUNT_INDEX]) * -1).toFixed(2)
+    }
+    else {
+      // no amount so return null (no data)
+      return null
+    }
   }
+
 
   // delete rows where there is only data in the 0th column (garbage)
   if (record[TRANSACTION_DATE_INDEX].trim() === "") return null
