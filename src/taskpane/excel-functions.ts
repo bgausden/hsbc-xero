@@ -294,7 +294,7 @@ export async function stripColumnText(
   }
 }
 
-export async function fixAmounts(
+/* export async function fixAmounts(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range,
@@ -351,7 +351,7 @@ export async function fixAmounts(
     console.error(`fixAmounts(): ${err}`)
     throw err
   }
-}
+} */
 
 export async function populateWorksheet(data: any[][], context: Excel.RequestContext) {
   const sheet = context.workbook.worksheets.getActiveWorksheet()
