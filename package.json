@@ -9,12 +9,13 @@
   "config": {
     "app-to-debug": "excel",
     "app-type-to-debug": "desktop",
-    "dev-server-port": 3000
+    "dev-server-port": 3000,
+    "document": "https://1drv.ms/x/s!ApjDgEsXAzlChJsithkIXORN8AHhsw?e=bTaRdq"
   },
   "type": "module",
   "scripts": {
     "build": "set DISABLE_V8_COMPILE_CACHE=1&& webpack --mode production --config ./webpack.config.cjs --https false",
-    "build:dev": "set DISABLE_V8_COMPILE_CACHE=1&& webpack --mode development --config ./webpack.config.cjs --https false",
+    "build:dev": "set DISABLE_V8_COMPILE_CACHE=1&& webpack --mode development --config ./webpack.config.cjs --https true",
     "build-dev": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
     "build:analyze": "npm run build -- --env.addons=bundleanalyzer",
     "dev-server": "set DISABLE_V8_COMPILE_CACHE=1&& webpack-dev-server --mode development --config ./webpack.config.cjs",
