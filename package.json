@@ -6,12 +6,6 @@
     "url": "https://github.com/OfficeDev/Office-Addin-TaskPane.git"
   },
   "license": "MIT",
-  "config": {
-    "app-to-debug": "excel",
-    "app-type-to-debug": "desktop",
-    "dev-server-port": 3000,
-    "document": "https://1drv.ms/x/s!ApjDgEsXAzlChJsithkIXORN8AHhsw?e=bTaRdq"
-  },
   "type": "module",
   "scripts": {
     "build": "set DISABLE_V8_COMPILE_CACHE=1&& webpack --mode production --config ./webpack.config.cjs --https false",
@@ -23,8 +17,8 @@
     "lint:fix": "office-addin-lint fix",
     "prettier": "office-addin-lint prettier",
     "start": "office-addin-debugging start manifest.xml",
-    "start:desktop": "office-addin-debugging start manifest.xml desktop",
-    "start:web": "office-addin-debugging start manifest.xml web",
+    "start:desktop": "office-addin-debugging start manifest.xml desktop --app excel --dev-server-port 3000",
+    "start:web": "office-addin-debugging start manifest.xml web --app excel --dev-server-port 3000 --document https://1drv.ms/x/s!ApjDgEsXAzlChJsithkIXORN8AHhsw?e=bTaRdq",
     "stop": "office-addin-debugging stop manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
