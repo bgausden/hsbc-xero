@@ -1,3 +1,4 @@
+import Dotenv from 'dotenv-webpack'
 import { getHttpsServerOptions } from "office-addin-dev-certs";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
@@ -70,6 +71,7 @@ export default async (env, options) => {
       ]
     },
     plugins: [
+      new Dotenv(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
