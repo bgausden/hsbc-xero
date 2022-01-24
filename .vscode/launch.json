@@ -5,6 +5,50 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Excel Desktop (Edge Chromium)",
+      "type": "pwa-msedge",
+      "request": "attach",
+      "useWebView": true,
+      "port": 9229,
+      "timeout": 600000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "Outlook Desktop (Edge Chromium)",
+      "type": "pwa-msedge",
+      "request": "attach",
+      "useWebView": true,
+      "port": 9229,
+      "timeout": 600000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Outlook Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "PowerPoint Desktop (Edge Chromium)",
+      "type": "pwa-msedge",
+      "request": "attach",
+      "useWebView": true,
+      "port": 9229,
+      "timeout": 600000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: PowerPoint Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "Word Desktop (Edge Chromium)",
+      "type": "pwa-msedge",
+      "request": "attach",
+      "useWebView": true,
+      "port": 9229,
+      "timeout": 600000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Word Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
       "name": "Office Online (Chrome)",
       "type": "chrome",
       "request": "launch",
