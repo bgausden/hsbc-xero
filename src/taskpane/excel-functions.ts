@@ -1,15 +1,17 @@
 // eslint-disable-next-line node/no-missing-import
 import { displayMessageBar } from "./messagebar"
-// eslint-disable-next-line node/no-missing-import
-import { TRANSACTION_DATE } from "./taskpane"
 
 /* global Excel */
 
-export function isRange(range: Excel.Range | Error): range is Excel.Range {
-  return (range as Excel.Range).address !== undefined
-}
+/* Most of the code in this file is not used. The original idea was to manipulate the contents of an Excel sheet in-place. 
+Instead we now use the CSV npm package to parse the source file and only when parsing is complete do we paste the data into 
+a (hopefully) empty populateWorksheet ready for immediate saving as a CSV file. */
 
-export async function stripTabComma(context: Excel.RequestContext, sheet: Excel.Worksheet) {
+/* export function isRange(range: Excel.Range | Error): range is Excel.Range {
+  return (range as Excel.Range).address !== undefined
+} */
+
+/* export async function stripTabComma(context: Excel.RequestContext, sheet: Excel.Worksheet) {
   // eslint-disable-next-line no-unused-vars
   let numReplacements = 0
 
@@ -38,9 +40,9 @@ export async function stripTabComma(context: Excel.RequestContext, sheet: Excel.
       }
     )
     .catch(() => 0)
-}
+} */
 
-export async function deleteExtraneousWhitespace(
+/* export async function deleteExtraneousWhitespace(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range
@@ -64,18 +66,20 @@ export async function deleteExtraneousWhitespace(
     }
     usedRange.values = newValues
 
-    /* let foundAreas = sheet.findAllOrNullObject(`\t`, { completeMatch: false, matchCase: false }).areas
-    foundAreas.load("items")
-    await context.sync()
-    let foundRanges = foundAreas.items
-    if (foundRanges) {
-      foundRanges.forEach(async range => {
-        range.load("values")
-        await context.sync()
-        range.values = range.values.map((row => row.map((value) => (value as string).replace(`\t`, ``))))
-      })
-      numReplacements = foundRanges.length
-    } */
+    // let foundAreas = sheet.findAllOrNullObject(`\t`, { completeMatch: false, matchCase: false }).areas
+    // foundAreas.load("items")
+    // await context.sync()
+    // let foundRanges = foundAreas.items
+    // if (foundRanges) {
+    //   foundRanges.forEach(async range => {
+    //     range.load("values")
+    //     await context.sync()
+    //     range.values = range.values.map((row => row.map((value) => (value as string).replace(`\t`, ``))))
+    //   })
+    //   numReplacements = foundRanges.length
+    // }
+
+
   } catch (err) {
     console.error(`deleteExtraneousWhitespace(): ${err}`)
   }
@@ -90,9 +94,9 @@ export async function deleteExtraneousWhitespace(
     .catch((err) => {
       return new Error(err)
     })
-}
+} */
 
-export async function deleteExtraneousRows(
+/* export async function deleteExtraneousRows(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range
@@ -133,9 +137,9 @@ export async function deleteExtraneousRows(
     .catch((err) => {
       console.log(`Couldn't delete: ${err}`)
     })
-}
+} */
 
-export async function concatConsecutiveColValues(
+/* export async function concatConsecutiveColValues(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range,
@@ -185,9 +189,9 @@ export async function concatConsecutiveColValues(
     console.log(`concatConsecutiveColValues(): ${err}`)
     throw err
   }
-}
+} */
 
-export async function findHeader(
+/* export async function findHeader(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range,
@@ -230,9 +234,9 @@ export async function findHeader(
     let stringErr = err as string
     return new Error(stringErr)
   }
-}
+} */
 
-export async function findHeaderCol(
+/* export async function findHeaderCol(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range,
@@ -252,9 +256,9 @@ export async function findHeaderCol(
       throw new Error(`Unable to locate header column for ${headerText}`)
     })
   }
-}
+} */
 
-export async function stripColumnText(
+/* export async function stripColumnText(
   context: Excel.RequestContext,
   sheet: Excel.Worksheet,
   usedRange: Excel.Range,
@@ -292,7 +296,7 @@ export async function stripColumnText(
     console.error(`stripColumnText(): ${err}`)
     throw err
   }
-}
+} */
 
 /* export async function fixAmounts(
   context: Excel.RequestContext,
