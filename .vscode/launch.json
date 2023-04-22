@@ -5,6 +5,29 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "npm start",
+      "name": "Debug: Excel Desktop",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "npm stop",
+      "name": "Stop Debug",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "name": "Excel Desktop (Edge Chromium)",
+      "type": "msedge",
+      "request": "attach",
+      "port": 9229,
+      "timeout": 600000,
+      "sourceMaps": true,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
       "name": "Office Online (Chrome)",
       "type": "chrome",
       "request": "launch",
@@ -16,8 +39,9 @@
       "preLaunchTask": "Debug: Web"
     },
     {
+      "version": "stable",
       "name": "Office Online (Edge Chromium)",
-      "type": "pwa-msedge",
+      "type": "msedge",
       "request": "launch",
       "port": 9222,
       // To debug your Add-in:

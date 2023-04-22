@@ -28,24 +28,20 @@
         "showReuseMessage": false
       }
     },
-    /* {
-      "label": "Debug: Excel Desktop",
-      "type": "npm",
-      "script": "start:desktop -- --app excel",
-      "presentation": {
-        "clear": true,
-        "panel": "dedicated",
-      },
-      "problemMatcher": []
-    }, */
     {
       "label": "Debug: Excel Desktop",
       "type": "shell",
       "command": "npm",
-      "args": ["run-script","start:desktop", "--","--app","excel"],
+      "args": [
+        "run-script",
+        "start:desktop",
+        "--",
+        "--app",
+        "excel"
+      ],
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -55,7 +51,7 @@
       "script": "start:desktop -- --app powerpoint",
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -65,7 +61,7 @@
       "script": "start:desktop -- --app word",
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -141,5 +137,13 @@
       },
       "problemMatcher": []
     },
+    {
+      "type": "npm",
+      "script": "build-dev",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build-dev",
+      "detail": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'."
+    }
   ]
 }
