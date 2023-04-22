@@ -1,5 +1,6 @@
-import { getHttpsServerOptions } from "office-addin-dev-certs";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
+/* eslint-disable node/no-unpublished-import */
+import {getHttpsServerOptions} from "office-addin-dev-certs";
+import {CleanWebpackPlugin} from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import HtmlWebpackInlineSVGPlugin from "html-webpack-inline-svg-plugin";
@@ -66,7 +67,12 @@ export default async (env, options) => {
               }
             }
           ]
-        }
+        }/* ,
+        {
+          test: /\.js$/,
+          enforce: "pre",
+          use: ["source-map-loader"],
+        }, */
       ]
     },
     plugins: [
@@ -117,9 +123,10 @@ export default async (env, options) => {
         "Access-Control-Allow-Origin": "*"
       },
       https: options.https !== undefined ? options.https : await getHttpsServerOptions(),
-      port: process.env.npm_package_config_dev_server_port || 3000
+      port: process.env.npm_package_config_dev_server_port || 3000,
+      host: process.env.npm_package_config_dev_server_host || "127.0.0.1"
     }
-  };
+  }
 
   return config;
 };
