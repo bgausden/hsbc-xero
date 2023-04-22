@@ -1,10 +1,11 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -14,6 +15,17 @@
   "extends": [
     //"eslint-config-office-addins",
     "plugin:node/recommended"
+  ],
+  "ignorePatterns": [
+    "lib",
+    "lib-amd",
+    "dist",
+    "node_modules",
+    "coverage",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.test.js",
+    "src/**/*.test.jsx"
   ],
   "rules": {
     "node/no-unpublished-require": "off",
@@ -39,5 +51,31 @@
         ]
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "node/no-unsupported-features/es-syntax": "off"
+      }
+    }
+  ]
 }
