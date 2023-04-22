@@ -357,7 +357,7 @@ a (hopefully) empty populateWorksheet ready for immediate saving as a CSV file. 
   }
 } */
 
-export async function populateWorksheet(data: any[][], context: Excel.RequestContext) {
+export async function populateWorksheet(data: unknown[][], context: Excel.RequestContext):Promise<void> {
   const sheet = context.workbook.worksheets.getActiveWorksheet()
   const usedRange = sheet.getUsedRangeOrNullObject()
   usedRange.load(["address", "cellCount"])
@@ -372,4 +372,6 @@ export async function populateWorksheet(data: any[][], context: Excel.RequestCon
     sheet.getUsedRange().format.autofitColumns()
   }
   await context.sync()
+
+  
 }
