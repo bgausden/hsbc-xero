@@ -32,7 +32,7 @@ const onRecord = ({ raw, record }: { raw: string; record: string[] }, context: C
 
     stringRaw = stringRaw.substring(0, nThIndex) + stringRaw.substring(nThIndex + ",".length)
     // call CSV.parse() again on the newly constructed line. This time should return the correct number of fields.
-    let result = parse(stringRaw, {
+    const result = parse(stringRaw, {
       raw: true,
       trim: true,
       onRecord: onRecord,
@@ -61,10 +61,12 @@ const onRecord = ({ raw, record }: { raw: string; record: string[] }, context: C
 }
 
 export const csvOnload = (reader: FileReader, excelContext: Excel.RequestContext) => {
-  return async () => {
+  return async ():Promise<void> => {
+    // get the raw data, skipping the header
     const raw = reader.result as string
     const rawData = raw.slice(raw.indexOf(`\n`) + 1)
-    let data: string[][] = parse(rawData, {
+    // parse the raw data into a 2d array of strings
+    const data: string[][] = parse(rawData, {
       relax_column_count: true,
       trim: true,
       raw: true,
@@ -73,6 +75,7 @@ export const csvOnload = (reader: FileReader, excelContext: Excel.RequestContext
     })
     // replace the header
     data[0] = ["Date", "Amount", "Payee", "Description"]
+    // populate the worksheet
     populateWorksheet(data, excelContext)
   }
 }

@@ -6,7 +6,7 @@ import { MessageBar, MessageBarType } from "@fluentui/react/lib/MessageBar"
 
 /* global document */
 
-export function displayMessageBar(messageText: string) {
+export function displayMessageBar(messageText: string):void {
   interface IMessageBarProps {
     messageText?: string
     visible?: boolean

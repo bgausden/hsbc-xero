@@ -20,17 +20,23 @@ export const TRANSACTION_DATE = "Transaction Date";
 export const TRANSACTION_DATE_INDEX = 1; // zero indexed
 export const SALES = "SALES: ";
 
-export async function load() {
+export async function load(): Promise<void> {
   try {
     await Excel.run(async (context) => {
-      const file = document.getElementById("file") as HTMLInputElement;
-      const reader = new FileReader();
+      const elem = document.getElementById("file")
+      if (isHTMLElement(elem)) {
+        const file = document.getElementById("file") as HTMLInputElement;
+        const reader = new FileReader();
 
-      if (file?.files && file.files[0]) {
-        reader.onload = csvOnload(reader, context);
-        reader.readAsText(file.files[0]);
+        if (file.files) {
+          if (file.files[0]) {
+            reader.onload = csvOnload(reader, context);
+            reader.readAsText(file.files[0]);
+          }
+        }
+      } else {
+        throw new Error("file element not found")
       }
-
       context.trackedObjects.add(context.workbook.worksheets.getActiveWorksheet());
     });
   } catch (error) {
@@ -38,11 +44,24 @@ export async function load() {
   }
 }
 
+function isHTMLElement(elem: HTMLElement | null): elem is HTMLElement {
+  return elem !== null
+    && elem.tagName !== undefined
+}
 Office.onReady((info) => {
-  initializeIcons();
+   initializeIcons();
   if (info.host === Office.HostType.Excel) {
-    document.getElementById("sideload-msg")!.style.display = "none";
-    document.getElementById("app-body")!.style.display = "flex";
-    document.getElementById("load")!.onclick = load;
+    let elem = document.getElementById("sideload-msg")
+    if (isHTMLElement(elem)) {
+      elem.style.display = "none"
+    }
+    elem = document.getElementById("app-body")
+    if (isHTMLElement(elem)) {
+      elem.style.display = "flex"
+    }
+    elem = document.getElementById("load")
+    if (isHTMLElement(elem)) {
+      elem.onclick = load
+    }
   }
-});
+})
