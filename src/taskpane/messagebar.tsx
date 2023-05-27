@@ -6,48 +6,60 @@ import { MessageBar, MessageBarType } from "@fluentui/react/lib/MessageBar"
 
 /* global document */
 
-export function displayMessageBar(messageText: string):void {
-  interface IMessageBarProps {
-    messageText?: string
-    visible?: boolean
-    onDismiss?: () => void
-  }
+export function displayMessageBar(messageText: string): void {
+    interface IMessageBarProps {
+        messageText?: string
+        visible?: boolean
+        onDismiss?: () => void
+    }
 
-  const horizontalStackProps: IStackProps = {
-    horizontal: true,
-    tokens: { childrenGap: 16 },
-  }
-  const verticalStackProps: IStackProps = {
-    styles: { root: { overflow: "hidden", width: "100%" } },
-    tokens: { childrenGap: 20 },
-  }
+    const horizontalStackProps: IStackProps = {
+        horizontal: true,
+        tokens: { childrenGap: 16 },
+    }
+    const verticalStackProps: IStackProps = {
+        styles: { root: { overflow: "hidden", width: "100%" } },
+        tokens: { childrenGap: 20 },
+    }
 
-  const MBError = (props: IMessageBarProps) => (
-    <MessageBar
-      messageBarType={MessageBarType.error}
-      isMultiline={false}
-      onDismiss={props.onDismiss}
-      dismissButtonAriaLabel="Close"
-    >
-      {props.messageText}
-    </MessageBar>
-  )
+    const MBError = (props: IMessageBarProps) => (
+        <MessageBar
+            messageBarType={MessageBarType.error}
+            isMultiline={false}
+            onDismiss={props.onDismiss}
+            dismissButtonAriaLabel="Close"
+        >
+            {props.messageText}
+        </MessageBar>
+    )
 
-  const BasicMessageBar: FunctionComponent<IMessageBarProps> = ({ messageText }) => {
-    const [visible, setVisible] = useState<boolean | undefined>(true)
+    const BasicMessageBar: FunctionComponent<IMessageBarProps> = ({
+        messageText,
+    }) => {
+        const [visible, setVisible] = useState<boolean | undefined>(true)
 
-    const setVisibility = useCallback((visible: boolean) => setVisible(visible), [])
+        const setVisibility = useCallback(
+            (visible: boolean) => setVisible(visible),
+            []
+        )
 
-    const props: IMessageBarProps = { messageText, visible: true, onDismiss: () => setVisibility(false) }
+        const props: IMessageBarProps = {
+            messageText,
+            visible: true,
+            onDismiss: () => setVisibility(false),
+        }
 
-    return visible !== false ? (
-      <Stack {...horizontalStackProps}>
-        <Stack {...verticalStackProps}>
-          <MBError {...props} />
-        </Stack>
-      </Stack>
-    ) : null
-  }
+        return visible !== false ? (
+            <Stack {...horizontalStackProps}>
+                <Stack {...verticalStackProps}>
+                    <MBError {...props} />
+                </Stack>
+            </Stack>
+        ) : null
+    }
 
-  render(<BasicMessageBar messageText={messageText} />, document.getElementById("messagebar"))
+    render(
+        <BasicMessageBar messageText={messageText} />,
+        document.getElementById("messagebar")
+    )
 }

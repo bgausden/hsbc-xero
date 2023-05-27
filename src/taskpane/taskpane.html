@@ -3,72 +3,100 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lissome Task Pane Add-in</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Lissome Task Pane Add-in</title>
 
-    <!-- Office JavaScript API -->
-    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+        <!-- Office JavaScript API -->
+        <script
+            type="text/javascript"
+            src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"
+        ></script>
 
-    <!-- Get basic component styling for non-react components from the defunct office ui fabric js project. NB must load before office-ui-fabric-core or icons won't load-->
-    <link
-      rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.components.min.css"
-    />
+        <!-- Get basic component styling for non-react components from the defunct office ui fabric js project. NB must load before office-ui-fabric-core or icons won't load-->
+        <link
+            rel="stylesheet"
+            href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.components.min.css"
+        />
 
-    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
-    <link
-      rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.css"
-    />
+        <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+        <link
+            rel="stylesheet"
+            href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.css"
+        />
 
-    <!-- Template styles -->
-    <link href="taskpane.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body id="app-body" class="ms-font-m ms-Fabric">
-    <main>
-      <header class="ms-welcome__header ms-bgColor-neutralLighter">
-        <img inline width="50%" alt="Lissome" title="Lissome" src="../../assets/Glow Corporate Vertical.svg" />
-        <h1 class="ms-font-su">HSBC Xero</h1>
-      </header>
+        <!-- Template styles -->
+        <link href="taskpane.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body id="app-body" class="ms-font-m ms-Fabric">
+        <main>
+            <header class="ms-welcome__header ms-bgColor-neutralLighter">
+                <img
+                    inline
+                    width="50%"
+                    alt="Lissome"
+                    title="Lissome"
+                    src="../../assets/Glow Corporate Vertical.svg"
+                />
+                <h1 class="ms-font-su">HSBC Xero</h1>
+            </header>
 
-      <section id="sideload-msg" class="ms-welcome__main">
-        <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
-      </section>
-      <div><input id="file" type="file" name="file" style="display:none" accept=".csv,text/csv" /></div>
-      <div class="ms-Grid" dir="ltr">
-        <div class="ms-Grid-row">
-          <div class="ms-Grid-col" id="messagebar"></div>
-        </div>
-        <div class="ms-Grid-row">
-          <div class="ms-Grid-col">
-            <p class="ms-font-l">From an empty worksheet, import the HSBC CSV file, then click <b>Go</b>.</p>
-          </div>
-        </div>
-        <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm12 ms-lg6 ms-xl3 ms-xxl2">
-            <button id="pickCSV" class="ms-Button" onclick="document.getElementById('file').click()">
-              <i class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv"></i>
-              <span class="ms-Button-label">
-                Select CSV File
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="ms-Grid-row">
-          <div class="ms-Grid-col ms-sm6 ms-lg2">
-            <button id="load" class="ms-Button ms-Button--primary">
-              <span class="ms-Button-label">Go</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </main>
-  </body>
+            <section id="sideload-msg" class="ms-welcome__main">
+                <h2 class="ms-font-xl">
+                    Please sideload your add-in to see app body.
+                </h2>
+            </section>
+            <div>
+                <input
+                    id="file"
+                    type="file"
+                    name="file"
+                    style="display: none"
+                    accept=".csv,text/csv"
+                />
+            </div>
+            <div class="ms-Grid" dir="ltr">
+                <div class="ms-Grid-row">
+                    <div class="ms-Grid-col" id="messagebar"></div>
+                </div>
+                <div class="ms-Grid-row">
+                    <div class="ms-Grid-col">
+                        <p class="ms-font-l">
+                            From an empty worksheet, import the HSBC CSV file,
+                            then click <b>Go</b>.
+                        </p>
+                    </div>
+                </div>
+                <div class="ms-Grid-row">
+                    <div class="ms-Grid-col ms-sm12 ms-lg6 ms-xl3 ms-xxl2">
+                        <button
+                            id="pickCSV"
+                            class="ms-Button"
+                            onclick="document.getElementById('file').click()"
+                        >
+                            <i
+                                class="ms-Icon ms-BrandIcon--icon16 ms-BrandIcon--csv"
+                            ></i>
+                            <span class="ms-Button-label">
+                                Select CSV File
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="ms-Grid-row">
+                    <div class="ms-Grid-col ms-sm6 ms-lg2">
+                        <button id="load" class="ms-Button ms-Button--primary">
+                            <span class="ms-Button-label">Go</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
