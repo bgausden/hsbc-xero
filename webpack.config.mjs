@@ -1,11 +1,9 @@
-/* eslint-disable node/no-unpublished-import */
-import {getHttpsServerOptions} from "office-addin-dev-certs";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import HtmlWebpackInlineSVGPlugin from "html-webpack-inline-svg-plugin";
-// eslint-disable-next-line no-unused-vars
-import fs from "fs";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import {getHttpsServerOptions} from "office-addin-dev-certs";
+import process from "process";
 import ProvidePlugin from "webpack/lib/ProvidePlugin.js";
 
 const urlDev = "https://localhost:3000/";
