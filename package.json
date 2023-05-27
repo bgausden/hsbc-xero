@@ -43,7 +43,7 @@
     "@types/es6-promise": "^3.3.0",
     "@types/find-process": "1.2.0",
     "@types/jquery": "^3.5.5",
-    "@types/node": "^14.14.22",
+    "@types/node": "^14.18.48",
     "@types/office-js": "^1.0.204",
     "@types/office-runtime": "^1.0.14",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
