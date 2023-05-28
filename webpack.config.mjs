@@ -6,7 +6,7 @@ import {getHttpsServerOptions} from "office-addin-dev-certs";
 import process from "process";
 import ProvidePlugin from "webpack/lib/ProvidePlugin.js";
 import * as url from 'url';
-    const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 import path from "path";
 
 const urlDev = "https://localhost:3000/";
@@ -17,7 +17,7 @@ export default async (env, options) => {
   const config = {
     output: {
       path: path.resolve(__dirname, "dist"),
-  },
+    },
     devtool: "source-map",
     entry: {
       taskpane: "./src/taskpane/taskpane.tsx",
@@ -105,11 +105,18 @@ export default async (env, options) => {
       headers: {
         "Access-Control-Allow-Origin": "*"
       },
-      https: options.https !== undefined ? options.https : await getHttpsServerOptions(),
+      // https: options.https !== undefined ? options.https : await getHttpsServerOptions(),
+      server: {
+        type: "https",
+        options: {
+          ...await getHttpsServerOptions()
+        }
+
+      },
       port: process.env.npm_package_config_dev_server_port || 3000,
       host: process.env.npm_package_config_dev_server_host || "127.0.0.1"
     }
   }
 
   return config;
-};
+}
