@@ -16,7 +16,7 @@ export default async (env, options) => {
     entry: {
       // polyfill: "@babel/polyfill",
       taskpane: "./src/taskpane/taskpane.tsx",
-      commands: "./src/commands/commands.ts"
+      // commands: "./src/commands/commands.ts"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
@@ -35,7 +35,7 @@ export default async (env, options) => {
         }, */
         {
           test: /\.tsx?$/,
-          exclude: /node_modules/,
+          exclude: [/node_modules/, /otherSrc/],
           use: "ts-loader"
         },
         /*         {
@@ -101,12 +101,12 @@ export default async (env, options) => {
           }
         ]
       }),
-      new HtmlWebpackPlugin({
-        filename: "commands.html",
-        template: "./src/commands/commands.html",
-        chunks: ["polyfill", "commands"],
-        minify: true
-      }),
+      /*       new HtmlWebpackPlugin({
+              filename: "commands.html",
+              template: "./src/commands/commands.html",
+              chunks: ["polyfill", "commands"],
+              minify: true
+            }), */
       new ProvidePlugin({
         React: "react"
       })

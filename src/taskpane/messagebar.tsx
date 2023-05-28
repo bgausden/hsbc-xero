@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useState, useCallback } from "react"
-import { render } from "react-dom"
-//import { Stack, MessageBar, MessageBarType, IStackProps } from "@fluentui/react";
-import { Stack, IStackProps } from "@fluentui/react/lib/Stack"
 import { MessageBar, MessageBarType } from "@fluentui/react/lib/MessageBar"
+//import { Stack, MessageBar, MessageBarType, IStackProps } from "@fluentui/react";
+import { IStackProps, Stack } from "@fluentui/react/lib/Stack"
+import React, { FunctionComponent, useCallback, useState } from "react"
+import { render } from "react-dom"
 
 /* global document */
 
