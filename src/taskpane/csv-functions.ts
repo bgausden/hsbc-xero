@@ -1,5 +1,5 @@
 import { CastingContext } from "csv-parse"
-import parse from "csv-parse/lib/sync"
+import { parse } from "csv-parse/browser/esm/sync"
 import { populateWorksheet } from "./excel-functions"
 import { SALES, TRANSACTION_DATE_INDEX } from "./taskpane"
 
@@ -20,7 +20,7 @@ const onRecord = (
 ) => {
     if (
         context.error &&
-        context.error.code === "CSV_INCONSISTENT_RECORD_LENGTH"
+        context.error.code === "CSV_RECORD_INCONSISTENT_COLUMNS"
     ) {
         // find the 3rd comma in the line and excise it as it's probably incorrectly part of the payee's name (and shouldn't be but HSBC are crap so...)
         let stringRaw = raw as string

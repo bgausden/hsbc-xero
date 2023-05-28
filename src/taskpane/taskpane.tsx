@@ -46,6 +46,7 @@ export async function load(): Promise<void> {
 function isHTMLElement(elem: HTMLElement | null): elem is HTMLElement {
     return elem !== null && elem.tagName !== undefined
 }
+
 Office.onReady((info) => {
     initializeIcons()
     if (info.host === Office.HostType.Excel) {
