@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /*
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
@@ -15,7 +14,6 @@ import { initializeIcons } from "@fluentui/react/lib/Icons"
 
 /* global document, Excel, Office, FileReader */
 
-export const TRANSACTION_DATE = "Transaction Date"
 export const TRANSACTION_DATE_INDEX = 1 // zero indexed
 export const SALES = "SALES: "
 
