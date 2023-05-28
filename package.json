@@ -24,7 +24,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@fluentui/react": "^8.22.0",
+    "@fluentui/react": "^8.109.7",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "buffer": "^6.0.3",
