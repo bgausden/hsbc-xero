@@ -10,7 +10,7 @@ import "../../assets/Glow Corporate Vert Prot64w.png"
 import "../../assets/Glow Corporate Vert Prot80w.png"
 
 import { csvOnload } from "./csv-functions"
-import { initializeIcons } from "@fluentui/react/lib/Icons"
+import { initializeIcons } from "@fluentui/react"
 
 /* global document, Excel, Office, FileReader */
 
